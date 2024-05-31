@@ -38,7 +38,12 @@ public class Ventana {
                 empleado.calcularAporte();
                 empleado.calculaImpuesto(empleado);
                 empleado.calcularFondos();
-                colaEmpleado.encolar(empleado);
+                empleado.calcularTotalSueldo();
+                try {
+                    colaEmpleado.encolar(empleado);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
                 llenarJList();
                 System.out.println(empleado);
                 limpiar();

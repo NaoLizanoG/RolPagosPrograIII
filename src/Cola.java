@@ -8,7 +8,13 @@ public class Cola {
     public Cola(){
         listaEmpleados=new PriorityQueue<Empleado>();
     }
-public  void encolar (Empleado empleado){
+public  void encolar (Empleado empleado)throws Exception{
+
+        for (Empleado e:listaEmpleados){
+            if (e.getCedula().equals(empleado.getCedula())) {
+                throw new Exception("Ya existe un empleado con esa cedula");
+            }
+        }
         listaEmpleados.add(empleado);
 }
 
@@ -26,6 +32,8 @@ public void cambiar(Empleado empleado, String nombre, double sueldo){
         empleado.setSueldo(sueldo);
         empleado.calculaImpuesto(empleado);
         empleado.calcularAporte();
+        empleado.calcularFondos();
+        empleado.calcularTotalSueldo();
 
 }
 

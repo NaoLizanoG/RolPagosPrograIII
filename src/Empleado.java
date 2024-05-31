@@ -6,6 +6,7 @@ public class Empleado implements Comparable<Empleado>{
     private double aporteSeguro;
     private double impuestoRenta;
     private double fondosReserva;
+    private double totalSueldo;
 
 
     public Empleado(String cedula, String nombre, double sueldo, Fecha fechaIngreso) {
@@ -43,6 +44,10 @@ public class Empleado implements Comparable<Empleado>{
         }else {
             fondosReserva=0;
         }
+    }
+
+    public void calcularTotalSueldo(){
+        totalSueldo= sueldo-aporteSeguro-impuestoRenta+fondosReserva;
     }
 
     public String getCedula() {
@@ -101,6 +106,14 @@ public class Empleado implements Comparable<Empleado>{
         this.fondosReserva = fondosReserva;
     }
 
+    public double getTotalSueldo() {
+        return totalSueldo;
+    }
+
+    public void setTotalSueldo(double totalSueldo) {
+        this.totalSueldo = totalSueldo;
+    }
+
     @Override
     public String toString() {
         return "Cédula:'" + cedula + '\'' +
@@ -109,9 +122,9 @@ public class Empleado implements Comparable<Empleado>{
                 ", Fecha Ingreso:" + fechaIngreso +
                 ", Aporte Seguro:" + aporteSeguro +
                 ", Impuesto Renta:" + impuestoRenta +
-                ", Fondos Reserva:" + fondosReserva ;
+                ", Fondos Reserva:" + fondosReserva +
+                ", Total Sueldo:" + totalSueldo;
     }
-
 
     @Override
     public int compareTo(Empleado o) {
