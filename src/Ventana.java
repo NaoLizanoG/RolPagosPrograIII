@@ -91,6 +91,7 @@ public class Ventana {
                 List<Empleado> empleados= colaEmpleado.listarEmpleado();
                 List<Empleado> empleadosOrdenados= colaEmpleado.ordenarFondosB(empleados);
                 llenarJList2(empleadosOrdenados);
+
             }
         });
     }
