@@ -35,10 +35,11 @@ public class Empleado implements Comparable<Empleado>{
         }
     }
 
-    public void calcularAniosTrabajando(){
+    public void calcularFondos(){
+       int  tiempoTrabajando = (fechaIngreso.diferenciaFechas(fechaIngreso, fechaIngreso.fechaActual()))/12;
 
-        if (fechaIngreso.fechaEntrada()>=1){
-            fondosReserva=fechaIngreso.fechaEntrada()*sueldo;
+        if (tiempoTrabajando>=1){
+            fondosReserva=tiempoTrabajando*sueldo;
         }else {
             fondosReserva=0;
         }
@@ -102,15 +103,15 @@ public class Empleado implements Comparable<Empleado>{
 
     @Override
     public String toString() {
-        return "Empleado: " +
-                "cedula='" + cedula + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", sueldo=" + sueldo +
-                ", fechaIngreso=" + fechaIngreso +
-                ", aporteSeguro=" + aporteSeguro +
-                ", impuestoRenta=" + impuestoRenta +
-                ", fondosReserva=" + fondosReserva ;
+        return "Cédula:'" + cedula + '\'' +
+                ", Nombre:'" + nombre + '\'' +
+                ", Sueldo:" + sueldo +
+                ", Fecha Ingreso:" + fechaIngreso +
+                ", Aporte Seguro:" + aporteSeguro +
+                ", Impuesto Renta:" + impuestoRenta +
+                ", Fondos Reserva:" + fondosReserva ;
     }
+
 
     @Override
     public int compareTo(Empleado o) {

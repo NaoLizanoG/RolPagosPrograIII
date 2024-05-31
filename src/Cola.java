@@ -37,6 +37,74 @@ public void cambiar(Empleado empleado, String nombre, double sueldo){
         return lista;
 
     }
+    public List<Empleado>ordenarAporteB(List<Empleado> empleados){
+        for(int i=0; i<empleados.size(); i++){
+            boolean swapped = false;
+            for(int j=0; j<empleados.size()-i-1; j++){
+                Empleado p1=  empleados.get(j);
+                Empleado p2 =  empleados.get(j+1);
+
+                if(p1.getAporteSeguro()>p2.getAporteSeguro()){
+                    empleados.set(j, p2);
+                    empleados.set(j+1, p1);
+                    swapped = true;
+                }
+            }
+            if (swapped==false){
+                break;
+            }
+        }
+        return  empleados;
+
+    }
+    public List<Empleado>ordenarImpuestoB(List<Empleado> empleados){
+        for(int i=0; i<empleados.size(); i++){
+            boolean swapped = false;
+            for(int j=0; j<empleados.size()-i-1; j++){
+                Empleado p1=  empleados.get(j);
+                Empleado p2 =  empleados.get(j+1);
+
+                if(p1.getImpuestoRenta()>p2.getImpuestoRenta()){
+                    empleados.set(j, p2);
+                    empleados.set(j+1, p1);
+                    swapped = true;
+                }
+            }
+            if (swapped==false){
+                break;
+            }
+        }
+        return  empleados;
+
+    }
+
+    public List<Empleado>ordenarFondosB(List<Empleado> empleados){
+        for(int i=0; i<empleados.size(); i++){
+            boolean swapped = false;
+            for(int j=0; j<empleados.size()-i-1; j++){
+                Empleado p1=  empleados.get(j);
+                Empleado p2 =  empleados.get(j+1);
+
+                if(p1.getFondosReserva()>p2.getFondosReserva()){
+                    empleados.set(j, p2);
+                    empleados.set(j+1, p1);
+                    swapped = true;
+                }
+            }
+            if (swapped==false){
+                break;
+            }
+        }
+        return  empleados;
+
+    }
 
 
+    public PriorityQueue<Empleado> getListaEmpleados() {
+        return listaEmpleados;
+    }
+
+    public void setListaEmpleados(PriorityQueue<Empleado> listaEmpleados) {
+        this.listaEmpleados = listaEmpleados;
+    }
 }

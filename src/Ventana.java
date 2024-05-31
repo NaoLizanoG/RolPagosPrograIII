@@ -20,10 +20,16 @@ public class Ventana {
     private JTextField textFieldSueldo2;
     private JButton buscarButton;
     private JButton guardarCambiosButton;
+    private JButton verPorAporteAlButton;
+    private JButton verPorImpuestoAButton;
+    private JButton verPorFondosDeButton;
+    private JList list2;
+    private JButton holaButton;
 
     Cola colaEmpleado = new Cola();
-    DefaultListModel dlm =new DefaultListModel();
+
     public Ventana() {
+
         ingresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -31,10 +37,11 @@ public class Ventana {
                 Empleado empleado= new Empleado(textFieldCedula.getText().toString(), textFieldNombre.getText().toString(),Integer.parseInt( textFieldSueldo.getText().toString()), fecha);
                 empleado.calcularAporte();
                 empleado.calculaImpuesto(empleado);
-                empleado.calcularAniosTrabajando();
+                empleado.calcularFondos();
                 colaEmpleado.encolar(empleado);
                 llenarJList();
                 System.out.println(empleado);
+                limpiar();
             }
         });
         buscarButton.addActionListener(new ActionListener() {
@@ -62,10 +69,35 @@ public class Ventana {
                 }
             }
         });
+        verPorAporteAlButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Empleado> empleados= colaEmpleado.listarEmpleado();
+                List<Empleado> empleadosOrdenados= colaEmpleado.ordenarAporteB(empleados);
+                llenarJList2(empleadosOrdenados);
+            }
+        });
+        verPorImpuestoAButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Empleado> empleados= colaEmpleado.listarEmpleado();
+                List<Empleado> empleadosOrdenados= colaEmpleado.ordenarImpuestoB(empleados);
+                llenarJList2(empleadosOrdenados);
+            }
+        });
+        verPorFondosDeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Empleado> empleados= colaEmpleado.listarEmpleado();
+                List<Empleado> empleadosOrdenados= colaEmpleado.ordenarFondosB(empleados);
+                llenarJList2(empleadosOrdenados);
+            }
+        });
     }
 
 
     public void llenarJList(){
+        DefaultListModel dlm =new DefaultListModel();
         dlm.removeAllElements();
         List<Empleado> empleado= colaEmpleado.listarEmpleado();
         Collections.sort(empleado);
@@ -73,6 +105,15 @@ public class Ventana {
             dlm.addElement(p);
         }
         list1.setModel(dlm);
+    }
+    public void llenarJList2(List<Empleado> empleado){
+        DefaultListModel dlm2 =new DefaultListModel();
+        dlm2.removeAllElements();
+
+        for (Empleado p:empleado){
+            dlm2.addElement(p);
+        }
+        list2.setModel(dlm2);
     }
 
 
@@ -82,5 +123,16 @@ public class Ventana {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setSize(50000, 50000);
+    }
+
+
+    public void limpiar(){
+        textFieldNombre.setText("");
+        textFieldCedula.setText("");
+        textFieldSueldo.setText("");
+        textFieldDia.setText("");
+        textFieldMes.setText("");
+        textFieldAnio.setText("");
     }
 }

@@ -13,13 +13,19 @@ public class Fecha {
     }
 
 
-    public int fechaEntrada(){
+    public Fecha fechaActual(){
         GregorianCalendar gc = new GregorianCalendar();
+        int diaA=gc.get(GregorianCalendar.DAY_OF_MONTH);
+        int mesA=gc.get(GregorianCalendar.MONTH)+1;
         int anioA=gc.get(GregorianCalendar.YEAR);
 
-        int anioE=anioA-anio;
-
-        return anioE;
+        Fecha fechaActual= new Fecha(diaA,mesA,anioA);
+        return fechaActual;
+    }
+    public int diferenciaFechas(Fecha inicio, Fecha fin){
+        int inicioMeses=inicio.getAnio()*12+inicio.getMes();
+        int finMeses=fin.getAnio()*12+fin.getMes();
+        return finMeses-inicioMeses;
     }
     public int getDia() {
         return dia;
@@ -47,10 +53,8 @@ public class Fecha {
 
     @Override
     public String toString() {
-        return "Fecha{" +
-                "dia=" + dia +
-                ", mes=" + mes +
-                ", anio=" + anio +
-                '}';
+        return   dia +
+                "-" + mes +
+                "-" + anio;
     }
 }
